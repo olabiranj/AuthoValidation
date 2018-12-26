@@ -9,7 +9,6 @@
     <script src="assets/ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script src="assets/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js"></script>
     <style>
         body{
             background-image: url(img/6.jpg);
@@ -76,14 +75,15 @@
                     <form class="form-horizontal" role="form" action="/login/user" method="POST">
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="email" class="form-control input-sm" name="email" placeholder="Enter email">
+                                <input type="email" class="form-control input-sm" id="email" name="email" placeholder="Enter email">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="password" class="form-control input-sm" name="password" placeholder="Enter password">
+                                <input type="password" class="form-control input-sm" id="pwd" name="password" placeholder="Enter password">
                             </div>
                         </div>
+                        <p id="hide" style="color:red;"></p>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <div class="checkbox">
@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">Login</button>
+                                <button type="submit" class="btn btn-default" onclick="checklogin()">Login</button>
                             </div>
                         </div>
                     </form>
@@ -115,26 +115,32 @@
                 <div class="modal-body">
                     <form class="form-horizontal" role="form" action="/signup/user" method="POST">
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="email" class="form-control" name="email" placeholder="Email">
+                            <div class="col-sm-11">
+                                <input type="email" onchange="reg1()" class="form-control" id="remail" name="email" placeholder="Email">
                             </div>
+                            <div id="c1" class="col-sm-1 text-success"><span class="fa fa-check fa-2x"></span> </div>
+                            <div id="c2" class="col-sm-1 text-warning"><span class="fa fa-times fa-2x"></span> </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="fname" placeholder="First Name">
+                            <div class="col-sm-11">
+                                <input type="text" onchange="reg2()" class="form-control" id="fname" name="fname" placeholder="First Name">
                             </div>
+                            <div id="c3" class="col-sm-1 text-success"><span class="fa fa-check fa-2x"></span> </div>
+                            <div id="c4" class="col-sm-1 text-warning"><span class="fa fa-times fa-2x"></span> </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control" name="sname" placeholder="Surname">
+                            <div class="col-sm-11">
+                                <input type="text" onchange="reg3()" class="form-control" id="sname" name="sname" placeholder="Surname">
                             </div>
+                            <div id="c5" class="col-sm-1 text-success"><span class="fa fa-check fa-2x"></span> </div>
+                            <div id="c6" class="col-sm-1 text-warning"><span class="fa fa-times fa-2x"></span> </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-3">
                                 <h4>Date of birth:</h4>
                             </div>
                             <div class="col-sm-3">
-                                <input type="date" class="form-control" name="dob" placeholder="Password">
+                                <input type="date" class="form-control" id="password" name="dob" placeholder="Password">
                             </div>
                             <div class="col-sm-3">
                                 <h4>Gender:</h4>
@@ -148,9 +154,11 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-12">
-                                <input type="password" class="form-control" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                             </div>
+                            
                         </div>
+                        <p id="alat" style="color:red;"></p>
                         <div class="form-group">
                             <div class="col-sm-offset-5 col-sm-10">
                                 <button type="submit" class="btn btn-default">Submit</button>
@@ -164,5 +172,6 @@
             </div>
         </div>
     </div>
+<script src="js/script.js"></script>
 </body>
 </html>

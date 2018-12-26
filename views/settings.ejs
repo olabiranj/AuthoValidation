@@ -51,23 +51,24 @@
         <div class="tab-content">
             <div id="email" class="tab-pane fade in active">
                 <br>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" method="POST" action="/settings/edit/email?_method=PUT">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Old Email:</label>
                         <div class="col-sm-4">
-                            <input type="email" class="form-control" id="email" placeholder="Enter old email">
+                            <input type="email" class="form-control" id="email1" placeholder="Enter old email">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">New Email:</label>
                         <div class="col-sm-4">
-                            <input type="email" class="form-control" id="email" placeholder="Enter new email"><br>
-                            <input type="email" class="form-control" id="email" placeholder="Enter new email to confirm">
+                            <input type="email" class="form-control" id="email2" name="email" placeholder="Enter new email"><br>
+                            <input type="email" class="form-control" id="email3" placeholder="Enter new email to confirm">
+                            <p style="color:red"><span id="msg"></span></p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class=" btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -76,16 +77,16 @@
                 <br>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">Old Password:</label>
+                        <label class="control-label col-sm-2" for="">Old Password:</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" id="email" placeholder="Enter old password">
+                            <input type="password" class="form-control" placeholder="Enter old password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="email">New Password:</label>
+                        <label class="control-label col-sm-2" for="">New Password:</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" id="email" placeholder="Enter new password"><br>
-                            <input type="password" class="form-control" id="email" placeholder="Enter new password to confirm">
+                            <input type="password" class="form-control" placeholder="Enter new password"><br>
+                            <input type="password" class="form-control" placeholder="Enter new password to confirm">
                         </div>
                     </div>
                     <div class="form-group">
@@ -100,7 +101,7 @@
                     <label for="comment">Leave a comment:</label>
                     <textarea class="form-control" rows="5" id="comment"></textarea><br>
                     <label for="comment">Password:</label>
-                    <input type="password" class="form-control" id="email" placeholder="Enter new password">
+                    <input type="password" class="form-control" placeholder="Enter new password">
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
@@ -111,6 +112,7 @@
             </div>
         </div>
     </div>
+
 
 </body>
 
