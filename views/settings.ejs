@@ -43,15 +43,15 @@
     <div class="container">
         <h2>Settings</h2>
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#email">Change Email</a></li>
-            <li><a data-toggle="tab" href="#password">Change Password</a></li>
-            <li><a data-toggle="tab" href="#delete">Delete account</a></li>
+            <li class="active"><a data-toggle="tab" href="#emailPane">Change Email</a></li>
+            <li><a data-toggle="tab" href="#passwordPane">Change Password</a></li>
+            <li><a data-toggle="tab" href="#deletePane">Delete account</a></li>
         </ul>
     
         <div class="tab-content">
-            <div id="email" class="tab-pane fade in active">
+            <div id="emailPane" class="tab-pane fade in active">
                 <br>
-                <form class="form-horizontal" role="form" method="POST" action="/settings/edit/email?_method=PUT">
+                <div class="form-horizontal">
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">Old Email:</label>
                         <div class="col-sm-4">
@@ -61,42 +61,93 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="email">New Email:</label>
                         <div class="col-sm-4">
-                            <input type="email" class="form-control" id="email2" name="email" placeholder="Enter new email"><br>
+                            <input type="hidden" id="dbEmail" name="" value="<%= email%>">
+                            <input type="email" class="form-control" id="email2" placeholder="Enter new email"><br>
                             <input type="email" class="form-control" id="email3" placeholder="Enter new email to confirm">
-                            <p style="color:red"><span id="msg"></span></p>
+                            <p id="msg" style="color:red"> </p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class=" btn btn-primary">Submit</button>
+                            <button type="submit" class=" btn btn-primary" onclick="emailCheck()">Submit</button>
                         </div>
                     </div>
-                </form>
+                </div>
+                
+                <!-- Modal -->
+                <div id="emailModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Confirm Email Change</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Are you Sure you wanna change your email?</h3>
+                                <form action="/settings/edit/email?_method=PUT" method="post">
+                                    <input type="hidden" id="newEmail" name="newEmail">
+                                    <input type="hidden" id="dbEmail" name="dbEmail" value="<%= email%>">
+                                    <button class="btn btn-success">Yes</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                                </form>
+                                    
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
             </div>
-            <div id="password" class="tab-pane fade">
+            <div id="passwordPane" class="tab-pane fade">
                 <br>
-                <form class="form-horizontal" role="form">
+                <div class="form-horizontal" >
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="">Old Password:</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" placeholder="Enter old password">
+                            <input type="password" id="pass1" class="form-control" placeholder="Enter old password">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="">New Password:</label>
                         <div class="col-sm-4">
-                            <input type="password" class="form-control" placeholder="Enter new password"><br>
-                            <input type="password" class="form-control" placeholder="Enter new password to confirm">
+                            <input type="password" id="pass2" class="form-control" placeholder="Enter new password"><br>
+                            <input type="password" id="pass3" class="form-control" placeholder="Enter new password to confirm">
+                            <p id="msg2" style="color:red"> </p>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" onclick="passwordCheck()">Submit</button>
                         </div>
                     </div>
-                </form>
+                </div>
+
+                <div id="passwordModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Confirm Passowrd Change</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h3>Are you Sure you wanna change your Password?</h3>
+                                <form action="/settings/edit/password?_method=PUT" method="post">
+                                    <input type="hidden" id="newPass" name="newPass">
+                                    <input type="hidden" id="dbPass" name="dbPass" value="<%= password%>">
+                                    <button class="btn btn-success">Yes</button>
+                                    <button class="btn btn-danger" data-dismiss="modal">No</button>
+                                </form>
+                
+                            </div>
+                        </div>
+                
+                    </div>
+                </div>
             </div>
-            <div id="delete" class="tab-pane fade">
+            <div id="deletePane" class="tab-pane fade">
                 <div class="form-group col-sm-offset-1 col-sm-4">
                     <label for="comment">Leave a comment:</label>
                     <textarea class="form-control" rows="5" id="comment"></textarea><br>
@@ -112,6 +163,42 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function emailCheck() {
+            if (document.getElementById('email1').value == '' || document.getElementById('email2').value == '' || document.getElementById('email3').value == '') {
+                document.getElementById('msg').innerHTML = 'Empty fields';
+            }
+            else if (document.getElementById('email2').value !== document.getElementById('email3').value) {
+                document.getElementById('msg').innerHTML = 'Email Mismatch';
+            }
+            else if (document.getElementById('email1').value !== document.getElementById('dbEmail').value) { 
+                document.getElementById('msg').innerHTML = 'Invalid Email';
+            }
+            else {
+                document.getElementById('newEmail').value = document.getElementById('email2').value;
+                $('#emailModal').modal('show');
+            }
+        } function passwordCheck() {
+                if (document.getElementById('pass1').value == '' || document.getElementById('pass2').value == '' || document.getElementById('pass3').value == '') {
+                    document.getElementById('msg2').innerHTML = 'Empty fields';
+                }
+                else if (document.getElementById('pass2').value !== document.getElementById('pass3').value) {
+                    document.getElementById('msg2').innerHTML = 'Password Mismatch';
+                }
+                else if (document.getElementById('pass1').value !== document.getElementById('dbPass').value) {
+                    document.getElementById('msg2').innerHTML = 'Invalid Passowrd';
+                }
+                else {
+                    document.getElementById('newPass').value = document.getElementById('pass2').value;
+                    $('#passwordModal').modal('show');
+                }
+            }
+
+
+        
+        
+    </script>
 
 
 </body>

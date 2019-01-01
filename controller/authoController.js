@@ -63,7 +63,7 @@ exports.welcomePage = function (req, res, next) {
     res.render('welcomepg', {title: 'Registration Successful'});
 }
 exports.settings = function (req, res, next) {
-    res.render('settings', {title: 'Settings', username: req.user.fname});
+    res.render('settings', {title: 'Settings', username: req.user.fname, email: req.user.email, password: req.user.password});
 }
 exports.logout = function (req, res, next) {
     req.logout();
@@ -71,12 +71,20 @@ exports.logout = function (req, res, next) {
 }
 
 exports.emailUpdate = function (req, res, next) {
-    User.findOneAndUpdate({_id: req.user._id}, {email: req.body.email})
-        .exec()
-        .then(() => {
-            res.redirect('/profile');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+
+    if (req.body.dbEmail == req.user.email ) {
+        User.findOneAndUpdate({ _id: req.user._id }, { email: req.body.newEmail })
+            .exec()
+            .then(() => {
+                res.redirect('/profile');
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    else{
+        req.flash('info', "Incorrect Email!");
+        res.redirect('/settings');
+    }
 }
+
