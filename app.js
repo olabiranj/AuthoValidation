@@ -27,8 +27,9 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('mysecret'));
 app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     name: "autho_session",
@@ -41,12 +42,12 @@ app.use(session({
         collection: 'app_sessions'
     })
 }));
-app.use(flash());
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

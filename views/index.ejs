@@ -54,6 +54,7 @@
         <div class="jumbotron">
             <h1>Olabiran Joshua Olaiya</h1>
             <p>Testing Validation and Authorization.</p>
+            <h3 class='text-danger'><%= messages.error ? "Please Login to continue" : ''%></h3>
         </div>
     </div>
 
@@ -61,6 +62,7 @@
         <div class="btn-group btn-group-justified">
             <a  class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</a>
             <a  class="btn btn-primary" data-toggle="modal" data-target="#signupModal">Sign Up</a>
+            <a href="/download" class="btn btn-secondary">Download</a>
         </div>
     </div>
 
@@ -172,6 +174,12 @@
             </div>
         </div>
     </div>
+    
 <script src="js/script.js"></script>
+<script>
+    if (messages.success) {
+        alert('messages.success')
+    }
+</script>
 </body>
 </html>
