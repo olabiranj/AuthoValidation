@@ -42,12 +42,12 @@ exports.postStuff = function (req, res, next) {
 
     oneStuff.save()
         .then((data) => {
-            res.redirect('/pro');
+            res.redirect('/pro/1');
         })
         .catch((err) => {
             console.log("Error occured", err);
             req.flash('error', `${err.name}: ${err._message}`)
-            res.redirect('/pro');
+            res.redirect('/pro/1');
         });
 }
 exports.stuffDelete = function (req, res, next) {

@@ -64,7 +64,7 @@ router.post('/signup/user', passport.authenticate('local.registerUser', {
   failureFlash: true
 }))
 router.post('/login/user', passport.authenticate('local.loginUser', {
-  successRedirect: '/pro',
+  successRedirect: '/pro/1',
   failureRedirect: '/',
   failureFlash: true
 }))
